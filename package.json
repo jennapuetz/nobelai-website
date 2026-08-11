@@ -1,0 +1,25 @@
+{
+  "name": "nobelai-website-video",
+  "version": "1.0.0",
+  "description": "Remotion video project for NoBel AI",
+  "private": true,
+  "scripts": {
+    "dev": "remotion studio",
+    "build": "remotion bundle",
+    "render": "remotion render HelloWorld out/HelloWorld.mp4",
+    "upgrade": "remotion upgrade",
+    "lint": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.508",
+    "react": "19.0.0",
+    "react-dom": "19.0.0",
+    "remotion": "4.0.508"
+  },
+  "devDependencies": {
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "prettier": "^3.5.3",
+    "typescript": "~5.8.2"
+  }
+}
