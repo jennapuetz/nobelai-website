@@ -1,38 +1,39 @@
 import {Composition} from 'remotion';
+import {BRANDS} from './brands';
+import {BrandPromo} from './compositions/BrandPromo/BrandPromo';
 import {HelloWorld} from './HelloWorld';
-import {NoBelAIPromo} from './NoBelAI/NoBelAIPromo';
 
-const promoProps = {
-  tagline: 'Intelligence, built into your business.',
-  features: [
-    'Automate the busywork',
-    'Turn data into decisions',
-    'Move faster than ever',
-  ],
-  outroLine: 'NoBel AI — smarter starts here.',
-};
+const PROMO_DURATION = 450; // 15s at 30fps
 
+// One promo per brand, in landscape and vertical. Adding a brand to
+// src/brands/index.ts adds its compositions here automatically.
 export const RemotionRoot: React.FC = () => {
   return (
     <>
-      <Composition
-        id="NoBelAIPromo"
-        component={NoBelAIPromo}
-        durationInFrames={450}
-        fps={30}
-        width={1920}
-        height={1080}
-        defaultProps={promoProps}
-      />
-      <Composition
-        id="NoBelAIPromoVertical"
-        component={NoBelAIPromo}
-        durationInFrames={450}
-        fps={30}
-        width={1080}
-        height={1920}
-        defaultProps={promoProps}
-      />
+      {BRANDS.map((brand) => (
+        <Composition
+          key={`${brand.slug}-landscape`}
+          id={`Promo-${brand.slug}`}
+          component={BrandPromo}
+          durationInFrames={PROMO_DURATION}
+          fps={30}
+          width={1920}
+          height={1080}
+          defaultProps={{brandSlug: brand.slug}}
+        />
+      ))}
+      {BRANDS.map((brand) => (
+        <Composition
+          key={`${brand.slug}-vertical`}
+          id={`Promo-${brand.slug}-vertical`}
+          component={BrandPromo}
+          durationInFrames={PROMO_DURATION}
+          fps={30}
+          width={1080}
+          height={1920}
+          defaultProps={{brandSlug: brand.slug}}
+        />
+      ))}
       <Composition
         id="HelloWorld"
         component={HelloWorld}

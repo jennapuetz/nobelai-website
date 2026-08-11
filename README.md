@@ -44,14 +44,31 @@ npm run upgrade
 
 - `src/index.ts` — entry point, registers the Remotion root
 - `src/Root.tsx` — declares all compositions (videos) in the project
-- `src/HelloWorld.tsx` — demo composition (animated title)
+- `src/brands/` — one folder per brand: colors, fonts, motion, copy, and rules
+- `src/compositions/` — reusable video components
+- `public/brands/<slug>/` — logos, fonts, and images per brand
 - `remotion.config.ts` — Remotion CLI configuration
+
+## Brands
+
+Videos are brand-driven: the same composition renders in any brand's look by
+reading `src/brands/<slug>/`. See [`src/brands/README.md`](src/brands/README.md)
+for how to add a brand or fill one in.
+
+Each registered brand automatically gets two compositions:
+
+```bash
+npx remotion render Promo-yba out/yba.mp4              # 1920x1080
+npx remotion render Promo-yba-vertical out/yba-9x16.mp4 # 1080x1920
+```
 
 ## Adding a new video
 
-1. Create a new component in `src/` that renders your video content.
-2. Add a `<Composition>` entry for it in `src/Root.tsx` with an `id`, duration, fps, and dimensions.
+1. Create a component under `src/compositions/` that takes a brand and renders your content.
+2. Register it in `src/Root.tsx` with an `id`, duration, fps, and dimensions.
 3. Preview it with `npm run dev` or render it with `npx remotion render <id> out/<name>.mp4`.
+
+Read colors, fonts, and copy from the brand file — never hardcode them.
 
 ## Rendering in remote/cloud sessions
 
